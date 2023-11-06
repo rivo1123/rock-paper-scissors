@@ -1,4 +1,6 @@
 const buttons = document.querySelectorAll(".buttons button");
+const roundResult = document.querySelector(".round");
+const score = document.querySelector(".score");
 
 function getComputerChoice() {
   const choices = ['rock', 'paper', 'scissors'];
@@ -39,5 +41,8 @@ function compareScores(playerScore, computerScore) {
 
 // Add event listener that calls playRound when button is clicked
 buttons.forEach(button => {
-  button.addEventListener('click', () => playRound(button.id, getComputerChoice()));
+  button.addEventListener('click', () => {
+    const result = playRound(button.id, getComputerChoice());
+    roundResult.textContent = result;
+  });
 });
