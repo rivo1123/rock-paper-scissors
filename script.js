@@ -2,6 +2,10 @@ const buttons = document.querySelectorAll(".buttons button");
 const roundResult = document.querySelector(".round");
 const score = document.querySelector(".score");
 
+let playerScore = 0;
+let computerScore = 0;
+score.textContent = `Score: ${playerScore}:${computerScore}`;
+
 function getComputerChoice() {
   const choices = ['rock', 'paper', 'scissors'];
   let randomNumber = Math.floor(Math.random() * 3);
@@ -28,14 +32,19 @@ function playRound(playerSelection, computerSelection) {
 }
 
 //Compare player and computer scores and declare the winner
-function compareScores(playerScore, computerScore) {
-  console.log(`The score is ${playerScore}:${computerScore}`)
-  if (playerScore === computerScore) {
-    console.log("It's a draw!");
-  } else if (playerScore > computerScore) {
-    console.log("Player won!");
+function declareWinner(playerScore, computerScore) {
+  if (playerScore > computerScore) {
+    return `Score: ${playerScore}:${computerScore}. Player won!`;
   } else {
-    console.log("Computer won!");
+    return `Score: ${playerScore}:${computerScore}. Computer won!`;
+  }
+}
+
+//Update the score and display a winner 
+function updateScore(playerScore, computerScore) {
+  score.textContent = `Score: ${playerScore}:${computerScore}`;
+  if (playerScore === 5 || computerScore === 5) {
+    score.textContent =  declareWinner(playerScore, computerScore);
   }
 }
 
@@ -44,5 +53,12 @@ buttons.forEach(button => {
   button.addEventListener('click', () => {
     const result = playRound(button.id, getComputerChoice());
     roundResult.textContent = result;
+
+    if (result.includes("won")) {
+      playerScore++;
+    } else if (result.includes("lost")) {
+      computerScore++;
+    }
+    updateScore(playerScore, computerScore);
   });
 });
