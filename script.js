@@ -23,25 +23,6 @@ function playRound(playerSelection, computerSelection) {
   }
 }
 
-// Plays 5 rounds of the game and incremetns one of the score each round
-function game() {
-  let playerScore = 0;
-  let computerScore = 0;
-
-  for (let i =0; i < 5; i++) {
-    const playersChoice = prompt("Enter your choice");
-    const roundResult = playRound(playersChoice, getComputerChoice());
-    console.log(roundResult);
-
-    if (roundResult.includes("won")) {
-      playerScore++;
-    } else if(roundResult.includes("lost")) {
-      computerScore++;
-    }
-  }
-  compareScores(playerScore, computerScore);
-}
-
 //Compare player and computer scores and declare the winner
 function compareScores(playerScore, computerScore) {
   console.log(`The score is ${playerScore}:${computerScore}`)
