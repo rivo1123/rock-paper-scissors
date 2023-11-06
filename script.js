@@ -1,3 +1,5 @@
+const buttons = document.querySelectorAll(".buttons button");
+
 function getComputerChoice() {
   const choices = ['rock', 'paper', 'scissors'];
   let randomNumber = Math.floor(Math.random() * 3);
@@ -34,3 +36,8 @@ function compareScores(playerScore, computerScore) {
     console.log("Computer won!");
   }
 }
+
+// Add event listener that calls playRound when button is clicked
+buttons.forEach(button => {
+  button.addEventListener('click', () => playRound(button.id, getComputerChoice()));
+});
